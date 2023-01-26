@@ -38,6 +38,14 @@ def cek_stok():
     
     x = input()
 
+# Fungsi Untuk Menambah Stok Obat
+def tambah_stok():
+    os.system("clear")
+    print("Masukkan Nama Obat".center(60))
+    nama_obat = input()
+    print("Masukkan Jumlah Stok".center(60))
+    jumlah_stok = input()
+
 # Program Dimulai
 while True:
     os.system("clear")
@@ -45,4 +53,5 @@ while True:
     opsi = input("Masukkan Opsi\t: ")
     match opsi:
         case "1": cek_stok()
+        case "2": tambah_stok() 
         case "6": break
