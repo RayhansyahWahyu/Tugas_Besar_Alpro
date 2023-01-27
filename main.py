@@ -46,6 +46,16 @@ def tambah_stok():
     print("Masukkan Jumlah Stok".center(60))
     jumlah_stok = input()
 
+# Struktur Data Di copy Dari Template
+    database = TEMPLATE.copy()
+    database["nama_obat"] = nama_obat + TEMPLATE["nama_obat"][len(nama_obat):]
+    database["jumlah_stok"] = jumlah_stok + TEMPLATE["jumlah_stok"][len(jumlah_stok):]
+
+    data = f"{database['nama_obat']},{database['jumlah_stok']}\n"
+
+    with open("gudang.txt", "a",encoding="utf-8") as file:
+        file.write(data)
+
 # Program Dimulai
 while True:
     os.system("clear")
@@ -53,5 +63,5 @@ while True:
     opsi = input("Masukkan Opsi\t: ")
     match opsi:
         case "1": cek_stok()
-        case "2": tambah_stok() 
+        case "2": tambah_stok()
         case "6": break
