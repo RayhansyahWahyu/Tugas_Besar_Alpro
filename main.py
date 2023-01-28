@@ -56,6 +56,25 @@ def tambah_stok():
     with open("gudang.txt", "a",encoding="utf-8") as file:
         file.write(data)
 
+def cek_stok_obat_tersedia():
+    os.system("clear")
+
+    # Bagian Atas Tabel
+    nama_obat = input("Masukkan Nama Obat\t: ")
+
+    print("========================================")
+    with open("gudang.txt","r") as file:
+        data = file.readlines()
+        for content in data:
+            content = content.split(",")
+            jml_stok = content[1].replace('\n', '')
+            if content[0].replace(" ", "") == nama_obat:
+                print(f"Nama Obat   : {content[0]}")
+                print(f"Jumlah Stok : {jml_stok}")
+                break
+    print("========================================")
+    x = input()
+
 # Program Dimulai
 while True:
     os.system("clear")
@@ -64,4 +83,5 @@ while True:
     match opsi:
         case "1": cek_stok()
         case "2": tambah_stok()
+        case "3": cek_stok_obat_tersedia()
         case "6": break
