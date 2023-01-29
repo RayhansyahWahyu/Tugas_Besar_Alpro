@@ -103,6 +103,53 @@ def edit_obat():
         case "1": nama_obat = input("Masukkan Nama Baru\t: ")
         case "2": jumlah_stok = input("Masukkan Jumlah Stok Baru\t: ")
 
+    # Struktur Data Di copy Dari Template
+    database = TEMPLATE.copy()
+    database["nama_obat"] = nama_obat + TEMPLATE["nama_obat"][len(nama_obat):]
+    database["jumlah_stok"] = jumlah_stok + TEMPLATE["jumlah_stok"][len(jumlah_stok):]
+
+    data = f"{database['nama_obat']},{database['jumlah_stok']}\n"
+
+    with open("gudang.txt","r+") as file:
+        file.seek(index * len(data))
+        file.write(data)
+
+    print("=========Data Baru===========")
+    print(f"Nama Obat   : {nama_obat}")
+    print(f"Jumlah Stok : {jumlah_stok}")
+    print("===========================\n")
+    x = input()
+
+# Hapus Stok Obat
+def hapus_obat():
+    cek_stok()
+    index = int(input("Masukkan Nomor Obat\t: ")) - 1
+
+    os.system("clear")
+    with open("gudang.txt","r+") as file:
+        data = file.readlines()
+        for no,content in enumerate(data):
+            content = content.split(",")
+            if no == index:
+                break
+
+    nama_obat = content[0]
+    jumlah_stok = content[1].replace("\n", "")
+    print("===========================")
+    print(f"Nama Obat   : {nama_obat}")
+    print(f"Jumlah Stok : {jumlah_stok}")
+    print("===========================\n")
+    yakin = input("Yakin Ingin Di Hapus (y/t)\t: ")
+    
+    if yakin == "y":
+        with open("gudang.txt","r") as file:
+            data = file.readlines()
+
+            with open("gudang.txt","w") as file_baru:
+                for no,content in enumerate(data):
+                    if no != index:
+                        file_baru.write(content)
+                    
 # Program Dimulai
 while True:
     os.system("clear")
@@ -113,4 +160,5 @@ while True:
         case "2": tambah_stok()
         case "3": cek_stok_obat_tersedia()
         case "4": edit_obat()
+        case "5": hapus_obat()
         case "6": break
