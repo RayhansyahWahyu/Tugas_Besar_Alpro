@@ -75,6 +75,34 @@ def cek_stok_obat_tersedia():
     print("========================================")
     x = input()
 
+# Fungsi Untuk Edit Nama Atau Stok Obat
+def edit_obat():
+    cek_stok()
+    index = int(input("Masukkan Nomor Obat\t: ")) - 1
+
+    os.system("clear")
+    with open("gudang.txt","r+") as file:
+        data = file.readlines()
+        for no,content in enumerate(data):
+            content = content.split(",")
+            if no == index:
+                break
+
+    nama_obat = content[0]
+    jumlah_stok = content[1].replace("\n", "")
+    print("===========================")
+    print(f"Nama Obat   : {nama_obat}")
+    print(f"Jumlah Stok : {jumlah_stok}")
+    print("===========================\n")
+    x = input()
+
+    os.system("clear")
+    print("1. Edit Nama Obat\n2. Edit Jumlah Stok\n")
+    opsi = input("Masukkan Opsi Yang Ingin Di Edit [1,2]\t: ")
+    match opsi:
+        case "1": nama_obat = input("Masukkan Nama Baru\t: ")
+        case "2": jumlah_stok = input("Masukkan Jumlah Stok Baru\t: ")
+
 # Program Dimulai
 while True:
     os.system("clear")
@@ -84,4 +112,5 @@ while True:
         case "1": cek_stok()
         case "2": tambah_stok()
         case "3": cek_stok_obat_tersedia()
+        case "4": edit_obat()
         case "6": break
