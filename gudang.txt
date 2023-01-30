@@ -2,3 +2,4 @@
 pil                                               ,100                                               
 paramex                                           ,30                                                
 bodrex                                            ,35                                                
+amoxilin                                          ,100                                               

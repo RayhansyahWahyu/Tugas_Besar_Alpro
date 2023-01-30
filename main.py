@@ -22,6 +22,7 @@ def cek_stok():
     os.system("clear")
     with open("gudang.txt","r") as file:
         data = file.readlines()
+        data.sort()
     
     # Bagian Atas Tabel
     print("========================================")
